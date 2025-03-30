@@ -1,5 +1,6 @@
 {
 	"name": "portfolio",
+	"homepage": "https://tiakin.github.io/portfolio",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -9,7 +10,8 @@
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"gh-pages": "npm run build && npx gh-pages -d build"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -30,6 +32,8 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@sveltejs/adapter-static": "^3.0.8",
+		"gh-pages": "^6.3.0",
 		"three": "^0.175.0"
 	}
 }

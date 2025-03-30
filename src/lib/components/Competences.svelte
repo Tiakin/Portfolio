@@ -4,10 +4,10 @@
 
 <section
 	id="Mes compétences"
-	class="relative z-[1] min-h-screen px-10 py-28 transition-colors duration-500"
+	class="relative z-[1] flex min-h-screen items-center justify-center px-10 py-28 transition-colors duration-500"
 >
 	<div class="section-background competences-bg"></div>
-	<div class="mx-auto max-w-6xl text-center">
+	<div class="mx-auto flex w-full max-w-6xl items-center justify-center text-center">
 		<div class="skills-grid">
 			<div class="glassmorphism-panel content-center rounded-2xl px-6 py-12 text-3xl">
 				Programmation

@@ -5,9 +5,56 @@
 	import Projets from '../lib/components/Projets.svelte';
 
 	let activeSection = 'Présentation';
+	let observer;
 
 	import { onMount } from 'svelte';
-	onMount(() => {});
+	
+	onMount(() => {
+		// Special handling for section detection that works with nested sections
+		const handleScroll = () => {
+			// Get positions of all main sections
+			const presentationSection = document.getElementById('Présentation');
+			const competencesSection = document.getElementById('Mes compétences');
+			const projetsSection = document.getElementById('Mes projets');
+			
+			if (!presentationSection || !competencesSection || !projetsSection) return;
+			
+			const presentationTop = presentationSection.offsetTop;
+			const competencesTop = competencesSection.offsetTop;
+			const projetsTop = projetsSection.offsetTop;
+			const documentHeight = document.body.scrollHeight;
+			
+			const scrollPos = window.scrollY + window.innerHeight/2;
+			
+			if (scrollPos >= projetsTop) {
+				activeSection = 'Mes projets';
+			} else if (scrollPos >= competencesTop) {
+				activeSection = 'Mes compétences';
+			} else {
+				activeSection = 'Présentation';
+			}
+		};
+		
+		handleScroll();
+		
+		let scrollTimeout;
+		window.addEventListener('scroll', () => {
+			if (!scrollTimeout) {
+				scrollTimeout = setTimeout(() => {
+					handleScroll();
+					scrollTimeout = null;
+				}, 100);
+			}
+		});
+		
+		window.addEventListener('resize', handleScroll);
+		
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('resize', handleScroll);
+			clearTimeout(scrollTimeout);
+		};
+	});
 </script>
 
 <main class="overflow-hidden">

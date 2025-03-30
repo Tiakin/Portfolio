@@ -3,9 +3,15 @@
 
 	const navigateTo = (section) => {
 		activeSection = section;
+		
 		const element = document.getElementById(section);
 		if (element) {
-			element.scrollIntoView({ behavior: 'smooth' });
+			const y = element.getBoundingClientRect().top + window.pageYOffset;
+			
+			window.scrollTo({
+				top: y,
+				behavior: 'smooth'
+			});
 		}
 	};
 </script>
