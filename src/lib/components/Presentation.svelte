@@ -55,7 +55,7 @@
 					jeune âge, ce qui m'a permis d'apprendre de nombreuses technologies en autodidacte.
 				</p>
 				<p class="text-2xl text-white">
-					Je vous invite à explorer ce site pour découvrir mon parcours, mes formations, mes
+					Je vous invite à explorer mon portfolio pour découvrir mon parcours, mes formations, mes
 					compétences, ainsi que les projets que j'ai réalisés, qu'ils soient personnels ou issus de
 					mon cursus scolaire. Vous y trouverez également mon github et mon CV.
 				</p>
