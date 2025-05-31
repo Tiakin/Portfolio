@@ -114,7 +114,7 @@ export function createConstructionScene(container) {
 
     // Fonction de chargement du modèle
     loader.load(
-        '/Portfolio/src/lib/three/portfolio.glb',
+        '/Portfolio/portfolio.glb',
         (gltf) => {
             model = gltf.scene;
 
@@ -241,7 +241,6 @@ export function createConstructionScene(container) {
 
             scene.add(model);
         },
-        (xhr) => { },
         (error) => {
             console.error('Une erreur est survenue lors du chargement du modèle', error);
         }
