@@ -5,6 +5,7 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
+import { assets } from '$app/paths';
 
 // Importer nos classes custom
 import { PianoSampler } from './PianoSampler.js';
@@ -114,7 +115,7 @@ export function createConstructionScene(container) {
 
     // Fonction de chargement du modèle
     loader.load(
-        '/Portfolio/portfolio.glb',
+        `${assets}/portfolio.glb`,
         (gltf) => {
             model = gltf.scene;
 
