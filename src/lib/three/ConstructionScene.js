@@ -90,9 +90,9 @@ export function createConstructionScene(container) {
     const pointLight = new THREE.PointLight(0xffffff, 7, 0, 0);
     pointLight.position.set(1, 3, 1);
     pointLight.castShadow = true;
-    pointLight.shadow.mapSize.width = 1024;
-    pointLight.shadow.mapSize.height = 1024;
-    pointLight.shadow.bias = -0.001;
+    pointLight.shadow.mapSize.width = 2048;
+    pointLight.shadow.mapSize.height = 2048;
+    pointLight.shadow.bias = -0.0001;
     scene.add(pointLight);
     // Helper
     const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.5);
