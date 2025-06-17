@@ -115,6 +115,7 @@
 		width: 100%;
 		height: 200vh;
 		z-index: -1;
+		pointer-events: none;
 	}
 
 	.presentation-bg {

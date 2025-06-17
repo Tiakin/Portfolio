@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
@@ -13,7 +12,7 @@ import { InteractionManager } from './InteractionManager.js';
 
 
 
-export function createConstructionScene(container) {
+export function createConstructionScene(container, onInteractionStateChange = null) {
     // Créer une instance de notre classe PianoSampler
     const pianoSampler = new PianoSampler();
     
@@ -56,10 +55,9 @@ export function createConstructionScene(container) {
     controls.screenSpacePanning = false;
     controls.minDistance = 3;
     controls.maxDistance = 10;
-    controls.maxPolarAngle = Math.PI / 2;
-    
-    // Gestionnaire d'interactions pour les objets interactifs
-    const interactionManager = new InteractionManager(camera, controls);    // Configurer l'interaction avec le piano
+    controls.maxPolarAngle = Math.PI / 2;      // Gestionnaire d'interactions pour les objets interactifs
+    const interactionManager = new InteractionManager(camera, controls, onInteractionStateChange);
+
     interactionManager.addInteraction('piano', {
         cameraPosition: new THREE.Vector3(-3.18, 0.5, -2.5),
         cameraRotation: new THREE.Euler(0, 0, 0),
@@ -69,16 +67,67 @@ export function createConstructionScene(container) {
             console.log("Mode piano activé");
             // Actions spécifiques quand on entre en mode piano
             controls.minDistance = 1.5;     // Permettre un zoom plus proche en mode piano
-            controls.maxDistance = 5;       // Limiter le zoom arrière
-            controls.enableDamping = true;  // S'assurer que l'atténuation est activée
             controls.dampingFactor = 0.1;   // Atténuation plus prononcée pour plus de fluidité
         },
         onExit: () => {
             console.log("Mode piano désactivé");
             // Restaurer les limites originales des contrôles
             controls.minDistance = 3;
-            controls.maxDistance = 10;
             controls.dampingFactor = 0.05;  // Restaurer l'atténuation d'origine
+        }
+    });
+
+    // Configurer l'interaction avec l'Affichage G (gauche)
+    interactionManager.addInteraction('affichage_g', {
+        cameraPosition: new THREE.Vector3(-3.2, 1.03, -1.8),
+        cameraRotation: new THREE.Euler(0, 0, 0),
+        controlsTarget: new THREE.Vector3(-5, 1.03, -1.4),
+        onEnter: () => {
+            console.log("Mode Affichage G activé");
+            controls.minDistance = 1;
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.08;
+        },
+        onExit: () => {
+            console.log("Mode Affichage G désactivé");
+            controls.minDistance = 3;
+            controls.dampingFactor = 0.05;
+        }
+    });
+
+    // Configurer l'interaction avec l'Affichage D (droite)
+    interactionManager.addInteraction('affichage_d', {
+        cameraPosition: new THREE.Vector3(-3.3, 1.03, -2),
+        cameraRotation: new THREE.Euler(0, 0, 0),
+        controlsTarget: new THREE.Vector3(-5, 1.03, -2.65),
+        onEnter: () => {
+            console.log("Mode Affichage D activé");
+            controls.minDistance = 1;
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.08;
+        },
+        onExit: () => {
+            console.log("Mode Affichage D désactivé");
+            controls.minDistance = 3;
+            controls.dampingFactor = 0.05;
+        }
+    });
+
+    // Configurer l'interaction avec l'Affichage Mobile
+    interactionManager.addInteraction('affichage_mobile', {
+        cameraPosition: new THREE.Vector3(-3.7, 0.5, -2.4),
+        cameraRotation: new THREE.Euler(0, 0, 0),
+        controlsTarget: new THREE.Vector3(-3.8, 0, -2.45),
+        onEnter: () => {
+            console.log("Mode Affichage Mobile activé");
+            controls.minDistance = 1.1;
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.08;
+        },
+        onExit: () => {
+            console.log("Mode Affichage Mobile désactivé");
+            controls.minDistance = 3;
+            controls.dampingFactor = 0.05;
         }
     });
 
@@ -95,19 +144,12 @@ export function createConstructionScene(container) {
     pointLight.shadow.mapSize.height = 2048;
     pointLight.shadow.bias = -0.0001;
     scene.add(pointLight);
-    // Helper
-    const pointLightHelper = new THREE.PointLightHelper(pointLight, 0.5);
-    scene.add(pointLightHelper);
 
     // rectAreaLight
     const rectLight = new THREE.RectAreaLight(0xffffff, 10, 2, 2);
     rectLight.position.set(-3, 1.5, -3.5);
     rectLight.rotation.y = -Math.PI;
     scene.add(rectLight);
-
-    // Helper
-    const rectLightHelper = new RectAreaLightHelper(rectLight);
-    rectLight.add(rectLightHelper);
 
     // Chargeur GLTF
     const loader = new GLTFLoader();
@@ -130,6 +172,9 @@ export function createConstructionScene(container) {
 
                         // Vérifier si c'est une touche de piano (format: note+octave, comme C4, F#3, etc.)
                         const isPianoKey = cleanedName && /^([A-G]#?)([1-6])$/.test(cleanedName);
+
+                        // Vérifier si c'est un écran
+                        const isScreen = object.name.toLowerCase().includes('affichage') || object.name.toLowerCase().includes('ecran');
 
                         if (isPianoKey) {
                             // Désactiver les ombres pour les touches du piano
@@ -156,7 +201,20 @@ export function createConstructionScene(container) {
                                 isPlaying: false,
                                 // Stocker le nom nettoyé pour référence ultérieure
                                 cleanName: cleanedName,
-                                interactive: true
+                                interactive: true,
+                                type: 'piano'
+                            };
+                        } else if (isScreen) {
+                            // Pour les écrans, activer les ombres normalement
+                            object.castShadow = true;
+                            object.receiveShadow = true;
+                            
+                            
+                            // Marquer comme interactif
+                            object.userData = {
+                                interactive: true,
+                                type: 'screen',
+                                screenName: object.name
                             };
                         } else {
                             // Pour les autres objets, activer les ombres
@@ -167,15 +225,17 @@ export function createConstructionScene(container) {
                         console.warn("Erreur lors du traitement de l'objet", object.name, ":", error);
                     }
 
-                    // Rendre l'objet interactif
+                    // Rendre l'objet interactif pour le raycasting
+                    if (!object.userData) {
+                        object.userData = {};
+                    }
                     object.userData.interactive = true;
                 } else {
                     // Activer les ombres pour tous les autres objets
                     object.castShadow = true;
                     object.receiveShadow = true;
                 }
-            }
-            );
+            });
 
             // Ajouter un gestionnaire de clic sur le modèle
             const raycaster = new THREE.Raycaster();
@@ -212,6 +272,18 @@ export function createConstructionScene(container) {
                         }, 500); // Relâcher après 500ms
                     }
                 }
+            };            // Fonction pour identifier les écrans par leur nom
+            const getScreenInteractionFromName = (objectName) => {
+                if (objectName.toLowerCase().includes('affichage_g')) {
+                    return 'affichage_g';
+                }
+                if (objectName.toLowerCase().includes('affichage_d')) {
+                    return 'affichage_d';
+                }
+                if (objectName.toLowerCase().includes('ecran_mobile')) {
+                    return 'affichage_mobile';
+                }
+                return null;
             };
 
             container.addEventListener('click', (event) => {
@@ -222,18 +294,25 @@ export function createConstructionScene(container) {
 
                 // Lancer un rayon depuis la caméra à travers le point de la souris
                 raycaster.setFromCamera(mouse, camera);
-                // Vérifier les intersections avec les touches du piano
+                // Vérifier les intersections avec tous les objets
                 const intersects = raycaster.intersectObjects(model.children, true);
 
                 if (intersects.length > 0) {
                     const object = intersects[0].object;
                     
-                    // Si c'est une touche de piano et que nous ne sommes pas déjà en mode interactif
-                    if (object.userData && object.userData.cleanName && !interactionManager.isInteracting) {
-                        // Activer le mode piano
-                        interactionManager.startInteraction('piano');
-                    } else if (interactionManager.isInteracting && 
-                              interactionManager.activeInteraction === 'piano') {
+                    // Vérifier si c'est un écran
+                    const screenInteraction = getScreenInteractionFromName(object.name);
+                    
+                    if (!interactionManager.isInteracting) {
+                        // Si nous ne sommes pas en mode interactif, vérifier les différents types d'objets
+                        if (object.userData && object.userData.cleanName) {
+                            // C'est une touche de piano
+                            interactionManager.startInteraction('piano');
+                        } else if (screenInteraction) {
+                            // C'est un écran
+                            interactionManager.startInteraction(screenInteraction);
+                        }
+                    } else if (interactionManager.activeInteraction === 'piano') {
                         // Si nous sommes déjà en mode piano, jouer la note
                         playPianoNote(object);
                     }
@@ -307,6 +386,7 @@ export function createConstructionScene(container) {
                 container.removeChild(renderer.domElement);
             }
         },
-        resize: resizeHandler
+        resize: resizeHandler,
+        interactionManager: interactionManager
     };
 }

@@ -8,8 +8,9 @@ export class InteractionManager {
     /**
      * @param {THREE.Camera} camera - La caméra à contrôler
      * @param {import('three/examples/jsm/controls/OrbitControls').OrbitControls} controls - Les controls OrbitControls à gérer
+     * @param {Function} [onInteractionStateChange] - Callback appelé quand l'état d'interaction change
      */
-    constructor(camera, controls) {
+    constructor(camera, controls, onInteractionStateChange = null) {
         this.camera = camera;
         this.controls = controls;
         this.isInteracting = false;
@@ -19,6 +20,7 @@ export class InteractionManager {
         this.originalControlsTarget = null;
         this.originalControlsEnabled = null;
         this.interactions = new Map();
+        this.onInteractionStateChange = onInteractionStateChange;
         
         // Durée de transition de la caméra en secondes
         this.transitionDuration = 1.0;
@@ -78,6 +80,11 @@ export class InteractionManager {
         this.isInteracting = true;
         this.activeInteraction = id;
         
+        // Notifier le changement d'état
+        if (this.onInteractionStateChange) {
+            this.onInteractionStateChange(true, id);
+        }
+        
         // Exécuter le callback onEnter
         interaction.onEnter();
     }    /**
@@ -110,6 +117,11 @@ export class InteractionManager {
                 this.activeInteraction = null;
                 this.originalControlsTarget = null;
                 this.originalControlsEnabled = null;
+                
+                // Notifier le changement d'état
+                if (this.onInteractionStateChange) {
+                    this.onInteractionStateChange(false, null);
+                }
             },
             // Passer la cible originale des contrôles pour la transition
             this.originalControlsTarget
@@ -192,6 +204,22 @@ export class InteractionManager {
         animate();
     }
     
+    /**
+     * Obtenir l'état actuel de l'interaction
+     * @returns {boolean} - True si une interaction est en cours
+     */
+    getInteractionState() {
+        return this.isInteracting;
+    }
+
+    /**
+     * Obtenir l'ID de l'interaction active
+     * @returns {string|null} - L'ID de l'interaction active ou null
+     */
+    getActiveInteractionId() {
+        return this.activeInteraction;
+    }
+
     /**
      * Gérer l'événement keydown pour détecter la touche Échap
      * @param {KeyboardEvent} event - L'événement keydown
