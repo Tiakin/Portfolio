@@ -56,8 +56,25 @@ export function createConstructionScene(container, onInteractionStateChange = nu
     controls.screenSpacePanning = false;
     controls.minDistance = 3;
     controls.maxDistance = 10;
-    controls.maxPolarAngle = Math.PI / 2;      // Gestionnaire d'interactions pour les objets interactifs
+    controls.maxPolarAngle = Math.PI / 2;
+
+    // Définir une boîte de limitation pour le target
+    const minPan = new THREE.Vector3(-4, -3, -3);
+    const maxPan = new THREE.Vector3(2, 2, 2);
+
+    // Limites de rotation par défaut
+    controls.minAzimuthAngle = 0;
+    controls.maxAzimuthAngle = Math.PI / 2;
+
     const interactionManager = new InteractionManager(camera, controls, onInteractionStateChange);
+
+    // Écouter les changements et contraindre la position
+    controls.addEventListener('change', function() {
+        // Vérifier si on n'est pas dans une interaction avant de contraindre
+        if (!interactionManager.isInteracting) {
+            controls.target.clamp(minPan, maxPan);
+        }
+    });
 
     // Gestionnaire de contenu pour les écrans
     const screenContentManager = new ScreenContentManager();
@@ -72,12 +89,18 @@ export function createConstructionScene(container, onInteractionStateChange = nu
             // Actions spécifiques quand on entre en mode piano
             controls.minDistance = 1.5;     // Permettre un zoom plus proche en mode piano
             controls.dampingFactor = 0.1;   // Atténuation plus prononcée pour plus de fluidité
+            // Désactiver les limites de rotation pendant l'interaction
+            controls.minAzimuthAngle = -Infinity;
+            controls.maxAzimuthAngle = Infinity;
         },
         onExit: () => {
             console.log("Mode piano désactivé");
             // Restaurer les limites originales des contrôles
             controls.minDistance = 3;
             controls.dampingFactor = 0.05;  // Restaurer l'atténuation d'origine
+            // Restaurer les limites de rotation
+            controls.minAzimuthAngle = 0;
+            controls.maxAzimuthAngle = Math.PI / 2;
         }
     });
 
@@ -91,11 +114,17 @@ export function createConstructionScene(container, onInteractionStateChange = nu
             controls.minDistance = 1;
             controls.enableDamping = true;
             controls.dampingFactor = 0.08;
+            // Désactiver les limites de rotation pendant l'interaction
+            controls.minAzimuthAngle = -Infinity;
+            controls.maxAzimuthAngle = Infinity;
         },
         onExit: () => {
             console.log("Mode Affichage G désactivé");
             controls.minDistance = 3;
             controls.dampingFactor = 0.05;
+            // Restaurer les limites de rotation
+            controls.minAzimuthAngle = 0;
+            controls.maxAzimuthAngle = Math.PI / 2;
         }
     });
 
@@ -109,29 +138,41 @@ export function createConstructionScene(container, onInteractionStateChange = nu
             controls.minDistance = 1;
             controls.enableDamping = true;
             controls.dampingFactor = 0.08;
+            // Désactiver les limites de rotation pendant l'interaction
+            controls.minAzimuthAngle = -Infinity;
+            controls.maxAzimuthAngle = Infinity;
         },
         onExit: () => {
             console.log("Mode Affichage D désactivé");
             controls.minDistance = 3;
             controls.dampingFactor = 0.05;
+            // Restaurer les limites de rotation
+            controls.minAzimuthAngle = 0;
+            controls.maxAzimuthAngle = Math.PI / 2;
         }
     });
 
     // Configurer l'interaction avec l'Affichage Mobile
     interactionManager.addInteraction('affichage_mobile', {
-        cameraPosition: new THREE.Vector3(-3.7, 0.5, -2.4),
+        cameraPosition: new THREE.Vector3(-3.65, 0.5, -2.4),
         cameraRotation: new THREE.Euler(0, 0, 0),
-        controlsTarget: new THREE.Vector3(-3.8, 0, -2.45),
+        controlsTarget: new THREE.Vector3(-3.75, 0, -2.45),
         onEnter: () => {
             console.log("Mode Affichage Mobile activé");
             controls.minDistance = 1.1;
             controls.enableDamping = true;
             controls.dampingFactor = 0.08;
+            // Désactiver les limites de rotation pendant l'interaction
+            controls.minAzimuthAngle = -Infinity;
+            controls.maxAzimuthAngle = Infinity;
         },
         onExit: () => {
             console.log("Mode Affichage Mobile désactivé");
             controls.minDistance = 3;
             controls.dampingFactor = 0.05;
+            // Restaurer les limites de rotation
+            controls.minAzimuthAngle = 0;
+            controls.maxAzimuthAngle = Math.PI / 2;
         }
     });
 
