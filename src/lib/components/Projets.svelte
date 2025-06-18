@@ -87,27 +87,29 @@
 						<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 				</button>
-						<!-- Bouton d'information / fermeture -->
-				<button
-					class="info-btn"
-					class:is-close={showInfoPopup}
-					on:click={showInfoPopup ? closeInfoPopup : showProjectInfo}
-					aria-label={showInfoPopup ? "Fermer les informations" : "Informations sur le projet"}
-					title={showInfoPopup ? "Fermer les informations" : "Voir les détails du projet"}
-				>
-					{#if showInfoPopup}
-						<!-- Icône de fermeture -->
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					{:else}
-						<!-- Icône d'information -->
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-							<path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					{/if}
-				</button>
+				<!-- Bouton d'information / fermeture -->
+				{#if activeInteractionId !== 'piano'}
+					<button
+						class="info-btn"
+						class:is-close={showInfoPopup}
+						on:click={showInfoPopup ? closeInfoPopup : showProjectInfo}
+						aria-label={showInfoPopup ? "Fermer les informations" : "Informations sur le projet"}
+						title={showInfoPopup ? "Fermer les informations" : "Voir les détails du projet"}
+					>
+						{#if showInfoPopup}
+							<!-- Icône de fermeture -->
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						{:else}
+							<!-- Icône d'information -->
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+								<path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						{/if}
+					</button>
+				{/if}
 			{/if}
 			
 			<!-- Barre latérale d'informations -->
