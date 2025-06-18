@@ -15,7 +15,7 @@
 				},
 				{
 					name: 'Web',
-					skills: ['HTML/CSS', 'JavaScript', 'Node.js', 'PHP', 'Svelte', 'Symfony', 'TypeScript', 'Vue.js']
+					skills: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'PHP', 'Svelte', 'Tailwind', 'Symfony', 'TypeScript', 'Vue.js']
 				}
 			]
 		},
@@ -77,7 +77,7 @@
 			categories: [
 				{
 					name: 'Logiciels',
-					skills: ['Blender', 'Eclipse', 'IntelliJ IDEA']
+					skills: ['Blender', 'Eclipse', 'IntelliJ IDEA', 'Pterodactyl']
 				},
 				{
 					name: 'Systèmes',
