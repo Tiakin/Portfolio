@@ -733,7 +733,8 @@ export class ScreenContentManager {
             };
         }
         return null;
-    }    /**
+    }
+    /**
      * Déterminer quel écran est actuellement en interaction
      * @param {string} activeInteractionId - ID de l'interaction active
      * @returns {string|null} ID de l'écran en interaction ou null
