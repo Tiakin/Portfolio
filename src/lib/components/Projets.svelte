@@ -13,11 +13,15 @@
 	// État de la popup d'information
 	let showInfoPopup = false;
 	let currentProjectInfo = null;
-
 	// Callback pour recevoir les changements d'état d'interaction
 	function handleInteractionStateChange(interacting, interactionId) {
 		isInteracting = interacting;
 		activeInteractionId = interactionId;
+		
+		// Si on quitte une interaction, fermer automatiquement la popup
+		if (!interacting && showInfoPopup) {
+			closeInfoPopup();
+		}
 	}
 	// Fonction pour quitter l'interaction
 	function exitInteraction() {

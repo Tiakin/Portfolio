@@ -38,7 +38,6 @@
 						<p>{projectInfo.description}</p>
 					</div>
 				{/if}
-				
 				{#if projectInfo.technologies && projectInfo.technologies.length > 0}
 					<div class="technologies-section">
 						<h3>Technologies utilisées</h3>
@@ -49,7 +48,7 @@
 						</div>
 					</div>
 				{/if}
-						{#if projectInfo.skills && projectInfo.skills.length > 0}
+				{#if projectInfo.skills && projectInfo.skills.length > 0}
 					<div class="skills-section">
 						<h3>Compétences développées</h3>
 						<ul class="skills-list">
@@ -163,7 +162,7 @@
 		font-size: 0.9rem;
 		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
-		.skills-list {
+	.skills-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
