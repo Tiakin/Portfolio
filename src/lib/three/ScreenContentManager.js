@@ -19,7 +19,27 @@ export class ScreenContentManager {
                 url: 'smartdesk.dev',
                 favicon: `${assets}/SmartDesk-icon.png`,
                 isActive: true,
-                imageUrl: `${assets}/SmartDesk.png`
+                imageUrl: `${assets}/SmartDesk.png`,
+                description: "Application web collaborative simulant un bureau connecté avec calendrier et widgets.",
+                technologies: ["Svelte", "TailwindCSS", "JavaScript", "NodeJS", "MySQL", "Git"],
+                skills: [
+                    {
+                    name: "Réaliser : Développer des applications informatiques simples",
+                    description: "Création d'une application web avec composants dynamiques comme le calendrier et les widgets."
+                    },
+                    {
+                    name: "Optimiser : Sélectionner les algorithmes adéquats pour répondre à un problème donné",
+                    description: "Gestion des données des widgets et de leur affichage efficace."
+                    },
+                    {
+                    name: "Administrer : Déployer des services dans une architecture réseau",
+                    description: "Mise en ligne de l'application avec configuration d'un serveur et gestion des dépendances."
+                    },
+                    {
+                    name: "Collaborer : Situer son rôle et ses missions au sein d’une équipe informatique",
+                    description: "Travail en équipe de 4 avec répartition des tâches, intégration continue et gestion de version."
+                    }
+                ]
             },
             {
                 id: 'panleuth',
@@ -27,7 +47,23 @@ export class ScreenContentManager {
                 url: 'panleuth.com',
                 favicon: `${assets}/Panleuth-icon.png`,
                 isActive: false,
-                imageUrl: `${assets}/Panleuth.png`
+                imageUrl: `${assets}/Panleuth.png`,
+                description: "Site fictif d'une université gratuite réalisé seul pour un cours d'anglais.",
+                technologies: ["HTML", "CSS", "JavaScript", "Git", "Bootstrap", "Spline"],
+                skills: [
+                    {
+                    name: "Réaliser : Développer des applications informatiques simples",
+                    description: "Création d’un site vitrine complet avec contenu textuel en anglais."
+                    },
+                    {
+                    name: "Optimiser : Appréhender et construire des algorithmes",
+                    description: "Structure logique du contenu, navigation simple, responsive."
+                    },
+                    {
+                    name: "Conduire : Identifier les besoins métiers des clients et des utilisateurs",
+                    description: "Définir un message et une structure adaptés à un public cible fictif."
+                    }
+                ]
             },
             {
                 id: 'miammiam',
@@ -35,7 +71,27 @@ export class ScreenContentManager {
                 url: 'miammiam.fr',
                 favicon: `${assets}/Miammiam-icon.png`,
                 isActive: false,
-                imageUrl: `${assets}/Miammiam.png`
+                imageUrl: `${assets}/Miammiam.png`,
+                description: "Application de gestion de listes de courses développée en Symfony, avec fonctions collaboratives.",
+                technologies: ["PHP", "Symfony", "Twig", "Bootstrap", "MySQL", "Git"],
+                skills: [
+                    {
+                    name: "Réaliser : Partir des exigences et aller jusqu’à une application complète",
+                    description: "Création d'une application fonctionnelle avec back-end, front-end et persistance."
+                    },
+                    {
+                    name: "Gérer : Optimiser une base de données, interagir avec une application et mettre en œuvre la sécurité",
+                    description: "Gestion des utilisateurs, listes et partages avec sécurisation des accès."
+                    },
+                    {
+                    name: "Optimiser : Sélectionner les algorithmes adéquats pour répondre à un problème donné",
+                    description: "Fonctions d'ajout intelligent, suggestions automatiques d’articles."
+                    },
+                    {
+                    name: "Collaborer : Situer son rôle et ses missions au sein d’une équipe informatique",
+                    description: "Développement en groupe avec Git et communication régulière sur les tâches."
+                    }
+                ]
             },
             {
                 id: 'transportdoux',
@@ -43,8 +99,28 @@ export class ScreenContentManager {
                 url: 'transport.doux',
                 favicon: `${assets}/TransportDoux-icon.png`,
                 isActive: false,
-                imageUrl: `${assets}/TransportDoux.png`
-            }        ];
+                imageUrl: `${assets}/TransportDoux.png`,
+                description: "Site de sensibilisation aux moyens de transport écologiques disponibles sur le campus de la Doua.",
+                technologies: ["HTML", "CSS", "JavaScript", "Git"],
+                skills: [
+                    {
+                    name: "Réaliser : Développer des applications informatiques simples",
+                    description: "Création d’un site vitrine simple avec contenu informatif et visuel."
+                    },
+                    {
+                    name: "Conduire : Identifier les besoins métiers des clients et des utilisateurs",
+                    description: "Adapter le message pour informer et sensibiliser les étudiants à l'écologie."
+                    },
+                    {
+                    name: "Collaborer : Situer son rôle et ses missions au sein d’une équipe informatique",
+                    description: "Travail en équipe avec répartition des pages et intégration de contenus."
+                    },
+                    {
+                    name: "Gérer : Concevoir et mettre en place une base de données à partir d’un cahier des charges client",
+                    description: "Système simple de données, potentiellement en JSON ou statique, pour les infos transport."
+                    }
+                ]
+            }];
         
         // Applications de la barre de tâches (écran droite)
         this.taskbarApps = [
@@ -53,23 +129,113 @@ export class ScreenContentManager {
                 name: 'SAE Avion',
                 icon: `${assets}/SAEAvion-icon.png`,
                 isActive: true,
-                imageUrl: `${assets}/SAEAvion.png`
+                imageUrl: `${assets}/SAEAvion.png`,
+                title: 'SAE Avion',
+                description: "SAE consistant à visualiser les trajectoires de vols et détecter les collisions aériennes via code couleur.",
+                technologies: ["Java", "JavaFX", "CSV", "Git"],
+                skills: [
+                    {
+                    name: "Réaliser : Partir des exigences et aller jusqu’à une application complète",
+                    description: "Développement d’une interface et visualisation graphique complexe."
+                    },
+                    {
+                    name: "Optimiser : Analyser et optimiser des applications",
+                    description: "Algorithmes d’analyse de trajectoire et logique de détection de conflits."
+                    },
+                    {
+                    name: "Conduire : Appliquer une démarche de suivi de projet en fonction des besoins métiers des clients et des utilisateurs",
+                    description: "Mise en œuvre d’une SAE structurée avec itérations et validation."
+                    },
+                    {
+                    name: "Collaborer : Situer son rôle et ses missions au sein d’une équipe informatique",
+                    description: "Répartition technique et coordination sur l’intégration."
+                    }
+                ]
             },
             {
                 id: 'survie',
                 name: 'Survie',
                 icon: `${assets}/Survie-icon.png`,
                 isActive: false,
-                imageUrl: `${assets}/Survie.png`
+                imageUrl: `${assets}/Survie.png`,
+                title: 'Jeu de Survie',
+                description: "Plugin Minecraft complet développé seul ajoutant blocs, systèmes de craft et mécaniques de survie.",
+                technologies: ["Java", "Spigot API", "YAML", "Git"],
+                skills: [
+                    {
+                    name: "Réaliser : Adapter des applications sur un ensemble de supports (embarqué, web, mobile, IoT…)",
+                    description: "Développement dans un environnement contraint avec contraintes temps réel."
+                    },
+                    {
+                    name: "Optimiser : Analyser et optimiser des applications",
+                    description: "Optimisation des comportements, compatibilité serveur, gestion des ressources."
+                    },
+                    {
+                    name: "Administrer : Déployer des services dans une architecture réseau",
+                    description: "Déploiement du plugin sur des serveurs de jeu, configuration YAML."
+                    },
+                    {
+                    name: "Conduire : Appliquer une démarche de suivi de projet en fonction des besoins métiers des clients et des utilisateurs",
+                    description: "Design complet de gameplay et d’équilibrage, avec tests continus."
+                    }
+                ]
             },
             {
                 id: 'mtvehicles',
                 name: 'MTVehicles',
                 icon: `${assets}/MTVehicles-icon.jpg`,
                 isActive: false,
-                imageUrl: `${assets}/MTVehicles.png`
+                imageUrl: `${assets}/MTVehicles.png`,
+                title: 'MT Vehicles',
+                description: "Plugin Minecraft de gestion de véhicules, je suis contributeur actif sur ce projet open source.",
+                technologies: ["Java", "Spigot API", "YAML", "Git", "Gradle"],
+                skills: [
+                    {
+                    name: "Réaliser : Partir des exigences et aller jusqu’à une application complète",
+                    description: "Ajout de modules fonctionnels dans un code existant, participation active au projet."
+                    },
+                    {
+                    name: "Optimiser : Sélectionner les algorithmes adéquats pour répondre à un problème donné",
+                    description: "Améliorations de performances, gestion fine des comportements des véhicules."
+                    },
+                    {
+                    name: "Administrer : Installer et configurer un poste de travail",
+                    description: "Compilation, configuration de test, environnement de dev Minecraft."
+                    },
+                    {
+                    name: "Collaborer : Situer son rôle et ses missions au sein d’une équipe informatique",
+                    description: "Contribution open source, communication avec d'autres développeurs du projet."
+                    }
+                ]
             }
         ];
+        
+        // Application mobile (téléphone)
+        this.mobileApp = {
+            id: 'lyonguessr',
+            title: 'LyonGuessr',
+            name: 'LyonGuessr',
+            description: "Jeu mobile inspiré de GeoGuessr basé sur la ville de Lyon, avec géolocalisation, scoring et photos.",
+            technologies: ["Kotlin", "Google Maps API", "Firebase", "Android"],
+            skills: [
+                {
+                name: "Réaliser : Adapter des applications sur un ensemble de supports (embarqué, web, mobile, IoT…)",
+                description: "Application mobile multiplateforme avec carte, timer et gestion de l'état de jeu."
+                },
+                {
+                name: "Optimiser : Sélectionner les algorithmes adéquats pour répondre à un problème donné",
+                description: "Calcul des scores, distances, gestion des sessions."
+                },
+                {
+                name: "Gérer : Optimiser une base de données, interagir avec une application et mettre en œuvre la sécurité",
+                description: "Firebase pour stocker les données utilisateur et progression."
+                },
+                {
+                name: "Conduire : Appliquer une démarche de suivi de projet en fonction des besoins métiers des clients et des utilisateurs",
+                description: "Itérations sur le design UX, amélioration de l'expérience joueur."
+                }
+            ]
+        };
         
         this.activeTabIndex = 0;
         this.activeAppIndex = 0;
@@ -193,7 +359,8 @@ export class ScreenContentManager {
         
         // Effacer le canvas
         ctx.fillStyle = '#f0f0f0';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);        if (screenId === 'affichage_g') {
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (screenId === 'affichage_g') {
             this.drawBrowserLeftScreen(ctx, canvas);
         } else if (screenId === 'affichage_d') {
             this.drawWindowsRightScreen(ctx, canvas);
@@ -212,9 +379,9 @@ export class ScreenContentManager {
      * @param {number} x - Position X normalisée (0-1)
      * @param {number} y - Position Y normalisée (0-1)
      */
-    handleScreenClick(screenId, x, y = 0) {        
+    handleScreenClick(screenId, x, y) {        
         if (screenId === 'affichage_g') {
-            this.handleBrowserClick(x);
+            this.handleBrowserClick(x, y);
         } else if (screenId === 'affichage_d') {
             this.handleDesktopClick(x, y);
         }
@@ -223,14 +390,17 @@ export class ScreenContentManager {
     /**
      * Gérer les clics sur le navigateur
      * @param {number} x - Position X normalisée (0-1)
+     * @param {number} y - Position Y normalisée (0-1)
      */
-    handleBrowserClick(x) {
-        const tabIndex = Math.floor(x * this.browserTabs.length);
-        if (tabIndex >= 0 && tabIndex < this.browserTabs.length) {
-            this.activeTabIndex = tabIndex;
-            this.updateScreenContent('affichage_g');
+    handleBrowserClick(x, y) {
+        const tabHeight = 35; // Hauteur de la barre d'onglets
+        if( y < tabHeight / 720) {
+            const tabIndex = Math.floor(x * this.browserTabs.length);
+            if (tabIndex >= 0 && tabIndex < this.browserTabs.length) {
+                this.activeTabIndex = tabIndex;
+                this.updateScreenContent('affichage_g');
+            }
         }
-        
     }    /**
      * Gérer les clics sur le bureau Windows
      * @param {number} x - Position X normalisée (0-1)
@@ -522,5 +692,62 @@ export class ScreenContentManager {
         ctx.fillText(time, canvas.width - 10, canvas.height - taskbarHeight + 24);
         
         ctx.restore();
+    }    /**
+     * Récupérer les informations détaillées du projet actuellement affiché
+     * @param {string} screenId - Identifiant de l'écran ('affichage_g', 'affichage_d', ou 'affichage_mobile')
+     * @returns {Object|null} Informations détaillées du projet ou null
+     */
+    getCurrentProjectInfo(screenId) {
+        if (screenId === 'affichage_g') {
+            // Écran gauche - retourner l'onglet actif
+            if (this.activeTabIndex >= 0 && this.activeTabIndex < this.browserTabs.length) {
+                const activeTab = this.browserTabs[this.activeTabIndex];
+                return {
+                    title: activeTab.title,
+                    description: activeTab.description || '',
+                    technologies: activeTab.technologies || [],
+                    skills: activeTab.skills || [],
+                    url: activeTab.projectUrl || activeTab.url || ''
+                };
+            }
+        } else if (screenId === 'affichage_d') {
+            // Écran droit - retourner l'application active
+            if (this.activeAppIndex >= 0 && this.activeAppIndex < this.taskbarApps.length) {
+                const activeApp = this.taskbarApps[this.activeAppIndex];
+                return {
+                    title: activeApp.title || activeApp.name,
+                    description: activeApp.description || '',
+                    technologies: activeApp.technologies || [],
+                    skills: activeApp.skills || [],
+                    url: activeApp.projectUrl || ''
+                };
+            }
+        } else if (screenId === 'affichage_mobile') {
+            // Téléphone mobile - retourner l'application mobile
+            return {
+                title: this.mobileApp.title,
+                description: this.mobileApp.description || '',
+                technologies: this.mobileApp.technologies || [],
+                skills: this.mobileApp.skills || [],
+                url: this.mobileApp.projectUrl || ''
+            };
+        }
+        return null;
+    }    /**
+     * Déterminer quel écran est actuellement en interaction
+     * @param {string} activeInteractionId - ID de l'interaction active
+     * @returns {string|null} ID de l'écran en interaction ou null
+     */
+    getActiveScreenId(activeInteractionId) {
+        if (activeInteractionId === 'affichage_g') {
+            return 'affichage_g';
+        } else if (activeInteractionId === 'affichage_d') {
+            return 'affichage_d';
+        } else if (activeInteractionId === 'affichage_mobile') {
+            return 'affichage_mobile';
+        }
+        return null;
     }
+
+    
 }

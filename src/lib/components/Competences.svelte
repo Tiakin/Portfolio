@@ -147,7 +147,8 @@
 				on:click={() => openSkillPopup('Et bien d\'autres...')}
 			>
 				Et bien d'autres...
-			</button>		</div>
+			</button>
+		</div>
 	</div>
 
 	<SkillPopup 

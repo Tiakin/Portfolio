@@ -207,7 +207,8 @@ export function createConstructionScene(container, onInteractionStateChange = nu
                                 cleanName: cleanedName,
                                 interactive: true,
                                 type: 'piano'
-                            };                        } else if (isScreen) {
+                            };
+                        } else if (isScreen) {
                             // Pour les écrans, activer les ombres normalement
                             object.castShadow = true;
                             object.receiveShadow = true;
@@ -223,7 +224,7 @@ export function createConstructionScene(container, onInteractionStateChange = nu
                             object.userData = {
                                 interactive: true,
                                 type: 'screen',
-                                screenName: object.name
+                                screenName: object.name.toLowerCase()
                             };
                         } else {
                             // Pour les autres objets, activer les ombres
@@ -281,7 +282,8 @@ export function createConstructionScene(container, onInteractionStateChange = nu
                         }, 500); // Relâcher après 500ms
                     }
                 }
-            };            // Fonction pour identifier les écrans par leur nom
+            };
+            // Fonction pour identifier les écrans par leur nom
             const getScreenInteractionFromName = (objectName) => {
                 if (objectName.toLowerCase().includes('affichage_g')) {
                     return 'affichage_g';
@@ -320,22 +322,23 @@ export function createConstructionScene(container, onInteractionStateChange = nu
                         } else if (screenInteraction) {
                             // C'est un écran
                             interactionManager.startInteraction(screenInteraction);
-                        }                    } else if (interactionManager.activeInteraction === 'piano') {
+                        }
+                    } else if (interactionManager.activeInteraction === 'piano') {
                         // Si nous sommes déjà en mode piano, jouer la note
                         playPianoNote(object);
                     } else if (interactionManager.activeInteraction === 'affichage_g') {
                         // Si nous sommes en mode écran de gauche, gérer la navigation des projets
-                        if (object.userData && object.userData.type === 'screen') {
+                        if (object.userData && object.userData.screenName == 'affichage_g') {
                             // Calculer la position relative sur l'écran (0-1)
                             const intersect = intersects[0];
                             const uv = intersect.uv;
                             if (uv) {
-                                screenContentManager.handleScreenClick('affichage_g', uv.x);
+                                screenContentManager.handleScreenClick('affichage_g', uv.x, uv.y);
                             }
                         }
                     } else if (interactionManager.activeInteraction === 'affichage_d') {
                         // Si nous sommes en mode écran de droite, gérer la navigation des applications
-                        if (object.userData && object.userData.type === 'screen') {
+                        if (object.userData && object.userData.screenName == 'affichage_d') {
                             // Calculer la position relative sur l'écran (0-1)
                             const intersect = intersects[0];
                             const uv = intersect.uv;
@@ -364,7 +367,7 @@ export function createConstructionScene(container, onInteractionStateChange = nu
         composer.setSize(container.clientWidth, container.clientHeight);
     };
 
-    window.addEventListener('resize', resizeHandler);    // Configuration du post-processing pour un rendu proche du ray tracing
+    window.addEventListener('resize', resizeHandler);
     const composer = new EffectComposer(renderer);
 
     // Rendu de base
