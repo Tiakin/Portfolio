@@ -9,6 +9,7 @@ import { assets } from '$app/paths';
 // Importer nos classes custom
 import { PianoSampler } from './PianoSampler.js';
 import { InteractionManager } from './InteractionManager.js';
+import { ScreenContentManager } from './ScreenContentManager.js';
 
 
 
@@ -57,6 +58,9 @@ export function createConstructionScene(container, onInteractionStateChange = nu
     controls.maxDistance = 10;
     controls.maxPolarAngle = Math.PI / 2;      // Gestionnaire d'interactions pour les objets interactifs
     const interactionManager = new InteractionManager(camera, controls, onInteractionStateChange);
+
+    // Gestionnaire de contenu pour les écrans
+    const screenContentManager = new ScreenContentManager();
 
     interactionManager.addInteraction('piano', {
         cameraPosition: new THREE.Vector3(-3.18, 0.5, -2.5),
@@ -203,11 +207,16 @@ export function createConstructionScene(container, onInteractionStateChange = nu
                                 cleanName: cleanedName,
                                 interactive: true,
                                 type: 'piano'
-                            };
-                        } else if (isScreen) {
+                            };                        } else if (isScreen) {
                             // Pour les écrans, activer les ombres normalement
                             object.castShadow = true;
                             object.receiveShadow = true;
+                            // Enregistrer l'écran avec le gestionnaire de contenu
+                            if (object.name.toLowerCase().includes('affichage_g')) {
+                                screenContentManager.registerScreen('affichage_g', object, 1280, 720);
+                            } else if (object.name.toLowerCase().includes('affichage_d')) {
+                                screenContentManager.registerScreen('affichage_d', object, 1280, 720);
+                            }
                             
                             
                             // Marquer comme interactif
@@ -311,15 +320,37 @@ export function createConstructionScene(container, onInteractionStateChange = nu
                         } else if (screenInteraction) {
                             // C'est un écran
                             interactionManager.startInteraction(screenInteraction);
-                        }
-                    } else if (interactionManager.activeInteraction === 'piano') {
+                        }                    } else if (interactionManager.activeInteraction === 'piano') {
                         // Si nous sommes déjà en mode piano, jouer la note
                         playPianoNote(object);
+                    } else if (interactionManager.activeInteraction === 'affichage_g') {
+                        // Si nous sommes en mode écran de gauche, gérer la navigation des projets
+                        if (object.userData && object.userData.type === 'screen') {
+                            // Calculer la position relative sur l'écran (0-1)
+                            const intersect = intersects[0];
+                            const uv = intersect.uv;
+                            if (uv) {
+                                screenContentManager.handleScreenClick('affichage_g', uv.x);
+                            }
+                        }
+                    } else if (interactionManager.activeInteraction === 'affichage_d') {
+                        // Si nous sommes en mode écran de droite, gérer la navigation des applications
+                        if (object.userData && object.userData.type === 'screen') {
+                            // Calculer la position relative sur l'écran (0-1)
+                            const intersect = intersects[0];
+                            const uv = intersect.uv;
+                            if (uv) {
+                                screenContentManager.handleScreenClick('affichage_d', uv.x, uv.y);
+                            }
+                        }
                     }
                 }
             });
 
             scene.add(model);
+        },
+        (xhr) => {
+            console.log((xhr.loaded / xhr.total * 100) + '% chargé');
         },
         (error) => {
             console.error('Une erreur est survenue lors du chargement du modèle', error);
@@ -367,6 +398,9 @@ export function createConstructionScene(container, onInteractionStateChange = nu
             // Libérer les ressources du gestionnaire d'interaction
             interactionManager.dispose();
 
+            // Libérer les ressources du gestionnaire de contenu d'écran
+            screenContentManager.dispose();
+
             controls.dispose();
             renderer.dispose();
 
@@ -387,6 +421,7 @@ export function createConstructionScene(container, onInteractionStateChange = nu
             }
         },
         resize: resizeHandler,
-        interactionManager: interactionManager
+        interactionManager: interactionManager,
+        screenContentManager: screenContentManager
     };
 }

@@ -2,6 +2,7 @@
 	import '$lib/styles/glassmorphism.css';
 	import { onMount, onDestroy } from 'svelte';
 	import { createConstructionScene } from '$lib/three/ConstructionScene.js';
+	
 	// References for Three.js scene
 	let container;
 	let sceneController;
@@ -46,8 +47,7 @@
 	class="relative z-[1] min-h-screen px-4 py-12 transition-colors duration-500"
 >
 	<div class="section-background projets-bg"></div>
-	<div class="mx-auto flex min-h-screen w-full flex-col items-center justify-center text-center">
-		<div bind:this={container} class="three-container">
+	<div class="mx-auto flex min-h-screen w-full flex-col items-center justify-center text-center">		<div bind:this={container} class="three-container">
 			<!-- Bouton de sortie d'interaction -->
 			{#if isInteracting}
 				<button
@@ -59,8 +59,7 @@
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
-				</button>
-			{/if}
+				</button>			{/if}
 		</div>
 	</div>
 </section>
@@ -120,7 +119,6 @@
 		outline: 2px solid rgba(255, 255, 255, 0.5);
 		outline-offset: 2px;
 	}
-
 	.exit-interaction-btn:active {
 		transform: scale(0.95);
 	}
