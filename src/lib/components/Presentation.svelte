@@ -1,5 +1,6 @@
 <script>
 	import '$lib/styles/glassmorphism.css';
+	import { assets } from '$app/paths';
 </script>
 
 <section
@@ -28,7 +29,7 @@
 					<span class="text-4xl font-medium text-white">github.com/Tiakin</span>
 				</a>
 				<a
-					href="#top"
+					href="{assets}/CV - killian duboucher.pdf"
 					class="glassmorphism-button flex w-full items-center justify-center gap-4 rounded-2xl"
 				>
 					<svg
