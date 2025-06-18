@@ -131,8 +131,8 @@ export class ScreenContentManager {
                 isActive: true,
                 imageUrl: `${assets}/SAEAvion.png`,
                 title: 'SAE Avion',
-                description: "SAE consistant à visualiser les trajectoires de vols et détecter les collisions aériennes via code couleur.",
-                technologies: ["Java", "JavaFX", "CSV", "Git"],
+                description: "SAE consistant à visualiser les trajectoires de vols et détecter les collisions aériennes grâce à la coloration d'un graphe.",
+                technologies: ["Java", "Swing", "CSV","GraphStream","JXMapViewer2", "Git"],
                 skills: [
                     {
                     name: "Réaliser : Partir des exigences et aller jusqu’à une application complète",
@@ -158,7 +158,7 @@ export class ScreenContentManager {
                 icon: `${assets}/Survie-icon.png`,
                 isActive: false,
                 imageUrl: `${assets}/Survie.png`,
-                title: 'Jeu de Survie',
+                title: 'Survie',
                 description: "Plugin Minecraft complet développé seul ajoutant blocs, systèmes de craft et mécaniques de survie.",
                 technologies: ["Java", "Spigot API", "YAML", "Git"],
                 skills: [
